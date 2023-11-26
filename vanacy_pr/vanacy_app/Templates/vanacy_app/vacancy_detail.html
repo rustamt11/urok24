@@ -1,0 +1,9 @@
+{% extends 'vanacy_app/base.html' %}
+
+{% block content %}
+    <h2>{{ vacancy.title }}</h2>
+    <p><strong>Company:</strong> {{ vacancy.company.name }}</p>
+    <p><strong>Required Languages:</strong> {% for language in vacancy.languages.all %}{{ language.name }} {% endfor %}</p>
+    <p><strong>Experience Level:</strong> {{ vacancy.get_experience_level_display }}</p>
+    <a href="{% url 'vacancy_list' %}">Back to list</a>
+{% endblock %}

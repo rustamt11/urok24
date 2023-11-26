@@ -1,0 +1,23 @@
+{% extends 'vanacy_app/base.html' %}
+
+{% block content %}
+    <h2>List of Vacancies</h2>
+
+    <form method="get">
+        {{ form.as_p }}
+        <button type="submit">Search</button>
+    </form>
+
+    <ul>
+        {% for vacancy in vacancies %}
+            <li>
+                <a href="{% url 'vacancy_detail' vacancy.pk %}">{{ vacancy.title }}</a>
+                <p>Company: {{ vacancy.company.name }}</p>
+                <p>Required Languages: {% for language in vacancy.languages.all %}{{ language.name }} {% endfor %}</p>
+                <p>Experience Level: {{ vacancy.get_experience_level_display }}</p>
+            </li>
+        {% empty %}
+            <li>No vacancies available.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
